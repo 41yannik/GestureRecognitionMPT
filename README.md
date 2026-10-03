@@ -2,6 +2,7 @@
 
 **Write a letter in the air, the webcam reads it.** The pipeline extracts 21 hand landmarks per frame with MediaPipe, tracks the fingertip trajectory and classifies it as one of 26 letters (A to Z) with one Gaussian HMM per class.
 
+[![Live demo](https://img.shields.io/badge/live%20demo-Hugging%20Face-ffcc4d)](https://huggingface.co/spaces/41yannik/air-writing-recognition)
 ![Python](https://img.shields.io/badge/python-3.12-3776ab)
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-hand%20landmarks-0097a7)
 ![hmmlearn](https://img.shields.io/badge/hmmlearn-GaussianHMM-orange)
@@ -15,6 +16,8 @@
 <td><img src="images/demo_W.gif" width="260" alt="Classification demo for the letter W"></td>
 </tr>
 </table>
+
+**[Try it in your browser](https://huggingface.co/spaces/41yannik/air-writing-recognition)**: webcam or mouse, same models, everything runs locally.
 
 ## Results
 
