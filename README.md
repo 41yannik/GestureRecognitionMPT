@@ -6,6 +6,7 @@
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-hand%20landmarks-0097a7)
 ![hmmlearn](https://img.shields.io/badge/hmmlearn-GaussianHMM-orange)
 [![Docs](https://img.shields.io/badge/docs-Sphinx-blue)](https://jaboll-ai.github.io/GestureRecognitionMPT)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 <table>
 <tr>
@@ -48,6 +49,10 @@ pip install -r requirements.txt
 python main.py        # live recognition via webcam
 python train.py       # retrain the models
 ```
+
+## License
+
+[MIT](LICENSE)
 
 ---
 
