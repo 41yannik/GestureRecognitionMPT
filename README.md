@@ -1,4 +1,59 @@
-# GestureRecognitionMPT
+# Gesture Recognition: air-written letters with Hidden Markov Models
+
+**Write a letter in the air, the webcam reads it.** The pipeline extracts 21 hand landmarks per frame with MediaPipe, tracks the fingertip trajectory and classifies it as one of 26 letters (A to Z) with one Gaussian HMM per class.
+
+![Python](https://img.shields.io/badge/python-3.12-3776ab)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-hand%20landmarks-0097a7)
+![hmmlearn](https://img.shields.io/badge/hmmlearn-GaussianHMM-orange)
+[![Docs](https://img.shields.io/badge/docs-Sphinx-blue)](https://jaboll-ai.github.io/GestureRecognitionMPT)
+
+<table>
+<tr>
+<td><img src="images/demo_A.gif" width="260" alt="Classification demo for the letter A"></td>
+<td><img src="images/demo_M.gif" width="260" alt="Classification demo for the letter M"></td>
+<td><img src="images/demo_W.gif" width="260" alt="Classification demo for the letter W"></td>
+</tr>
+</table>
+
+## Results
+
+| Test | Question | Accuracy |
+|---|---|---|
+| Standard split | Known people, new recordings | **92 %** (327 of 357) |
+| Person hold-out | One person never seen in training, averaged over all 4 | **73 %** (62 to 87 % per person) |
+
+Measured on our own dataset: 26 classes, recordings from 4 people, `n_components=10`, diagonal covariance. The hold-out number is the honest estimate for a stranger in front of the camera. Details and reproduction: [docs/ergebnisse.md](docs/ergebnisse.md).
+
+## Pipeline
+
+```
+Webcam → HandDetector (21 landmarks) → Preprocessor (fingertip trail, normalised) → HMM per letter → label in the camera image
+```
+
+## Context and my role
+
+Team project in the Machine Perception course, built by Wayan Schmidt ([upstream repo](https://github.com/22wayan/GestureRecognitionMPT)), Yannik Huber, Arian Sharifi-Tabar, Azad Aygün and jaboll-ai. This fork mirrors the final state.
+
+I authored the most commits in the team. My parts:
+
+- **Live mode:** fixed the real-time gesture segmentation (hysteresis, margin, buffer reset, debouncing) and drew the HMM label into the camera image, with a regression test
+- **Training and evaluation:** train-and-save script with a robust split guard, grid search for the HMM state count (`n_components=10` as the evidence-based choice), end-to-end test with an unseen person
+- **Data:** alphabet recordings A to Z (15 takes per letter) plus extra takes for the weak letters, and an interactive recording tool
+- **Docs:** results page with confusion matrix, live-mode guide, Sphinx cleanup
+
+## Quick start
+
+```bash
+pip install -r requirements.txt
+python main.py        # live recognition via webcam
+python train.py       # retrain the models
+```
+
+---
+
+> The full team documentation below is in German.
+
+## Projektdokumentation
 MPT Projekt zur Erkennung von Gesten in Webcam-Daten.
 Dafür werden Hand-Landmarks extrahiert und anschließend mit einem [Hidden-Markov-Modell](https://de.wikipedia.org/wiki/Hidden_Markov_Model) (HMM) klassifiziert.
 Die Online-Dokumentation zur Bearbeitung des Projekts finden sie [hier](https://jaboll-ai.github.io/GestureRecognitionMPT).
